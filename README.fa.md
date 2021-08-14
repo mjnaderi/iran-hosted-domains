@@ -2,11 +2,11 @@
 
 #  دامنه‌های میزبانی شده در ایران
 
+- [English Document](README.md)
 
-بسیاری از سرویس ها و دامنه های خارج از ایران سانسور و مسدود شده اند و ما باید برای دسترسی به آنها از VPN و proxy هایی با امنیت بالا استفاده کنیم، جدای از این مسئله چون ما از پراکسی استفاده میکنیم و ip ما ایران نیست دسترسی به بعضی سرویس های ایرانی مسدود میشود، برای دور زدن این سرویس ها ما لیستی از دامنه و ip جمع کردیم که دیگر نیاز به قطع کردن vpn برای دسترسی به سرویس داخلی نباشد
+بسیاری از سرویس‌ها و دامنه‌های خارج از ایران سانسور و مسدود شده‌اند و باید برای دسترسی به آن‌ها از VPN و Proxy هایی با امنیت بالا استفاده کنیم، جدای از این مسئله دسترسی به بعضی سرویس‌های ایرانی از طریق IP خارجی مسدود شده است. حال برای دور زدن این سرویس ها لیستی از دامنه‌های داخلی را جمع کرده‌ایم تا با اضافه کردن آن‌ به کلاینت‌های مورد استفاده، دیگر نیاز به قطع کردن VPN برای دسترسی به سرویس‌های داخلی نباشد.
 
-## مشکلات VPN و پروکسی
-
+## مشکلات VPN و پروکسی در ایران
 مشکلات زیر هنگام بازدید برخی از وب‌سایت‌های داخلی از طریق IP خارجی بوجود می‌آید:
 
 - برای دسترسی ممکن است کاربر را مجبور به داشتن IP داخلی کنند.
@@ -16,14 +16,14 @@
 
 ## روش استفاده
 
-بسته به اینکه از کدام کلاینت استفاده می‌کنید، ممکن است متفاوت باشد.  لیست دامنه‌ها و فایل‌های مربوط را می‌توانید از [این صفحه](https://github.com/SamadiPour/iran-hosted-domains/releases) دریافت کنید.  
+بسته به اینکه از کدام کلاینت استفاده می‌کنید، ممکن است متفاوت باشد.  لیست دامنه‌ها و فایل‌های مربوط را می‌توانید از [این صفحه][link-release] دریافت کنید.  
 برای سیستم routing بهتر در کلاینت‌های v2ray شما می‌توانید پارامتر `Domain Resolution Strategy` را به `IPIfNonMatch` تغییر دهید. [اطلاعات بیشتر](https://www.v2ray.com/en/configuration/routing.html) 
 
 
 ### [Qv2ray](https://github.com/Qv2ray/Qv2ray)
 
 
-شما می‌توانید فایل qv2ray_schema.json را در [این صفحه](https://github.com/SamadiPour/iran-hosted-domains/releases) پیدا کنید.
+شما می‌توانید فایل qv2ray_schema.json را در [این صفحه][link-release] پیدا کنید.
   
 1. فایل را دانلود کنید.
 2. در بخش `preferences` بر روی `Advanced Route Settings` کلیک کنید.
@@ -39,7 +39,7 @@
 این فایل در تمامی کلاینت‌های v2ray
   v2fly و xray قابل استفاده است.
 
-1. فایل `iran.dat` را از [این صفحه](https://github.com/SamadiPour/iran-hosted-domains/releases) دانلود کنید.
+1. فایل `iran.dat` را از [این صفحه][link-release] دانلود کنید.
 2. فایل را در کلاینت خود کپی و یا وارد کنید.  
   به عنوان مثال:
     - v2ray macOS: `/usr/local/share/v2ray`
@@ -53,7 +53,7 @@
 4. اتصال خود را قطع و وصل کنید.
   
 ### [SagerNet](https://github.com/SagerNet/SagerNet)
-1. فایل `iran.dat` را از [این صفحه](https://github.com/SamadiPour/iran-hosted-domains/releases) دانلود کنید.
+1. فایل `iran.dat` را از [این صفحه][link-release] دانلود کنید.
 2. فایل را از طریق `Route -> Three dots -> Manage Route Assets`  به کلاینت اضافه کنید.
 <p align="center">
   <img alt="sagernet" src="https://user-images.githubusercontent.com/24422125/123522689-1cd40580-d6d4-11eb-90c1-a0341927e283.jpg">
@@ -113,15 +113,21 @@
 - دامنه‌های ایران:
   - [سازمان فناوری اطلاعات ایران](https://g2b.ito.gov.ir/index.php/site/list_ip)
   - [سامانه مدیریت اینترنت مشتریان شرکت مخابرات ایران](https://adsl.tci.ir/panel/sites)
-  - [لیست شخصی](https://github.com/SamadiPour/iran-hosted-domains/blob/main/src/data/custom_domains.py)
+  - [لیست شخصی][link-custom]
 - تبلیغات:
   - [adblock-iran](https://github.com/farrokhi/adblock-iran)
 
 اگر شما منابع دیکری می‌شناسید، و یا وب‌سایتی پیدا کرده‌اید که اینجا نیست لطفا یک
-[issue](https://github.com/SamadiPour/iran-hosted-domains/issues) باز کنید و یا فایل `custom_domains.py` را تغییر داده و PR ایجاد کنید.
+[issue](https://github.com/SamadiPour/iran-hosted-domains/issues) باز کنید و یا فایل [custom_domains.py][link-custom] را تغییر داده و [PR][link-pr] ایجاد کنید.
 
 ## چگونه کار می کند؟
 
 به وسیله‌ی Github Action یک اسکریپت پایتون اجرا شده و از طریق منابع بالا فایل‌های مربوطه در صفحه‌ی رلیز ایجاد می‌شود.
 
 </div>  
+
+
+[link-custom]: src/data/custom_domains.py
+[link-pr]: ../../pulls
+[link-issues]: ../../issues
+[link-release]: ../../releases
