@@ -1,8 +1,9 @@
 # Iran Hosted Domains
 
-Many Iranians are aware of the fact that a lot of websites are blocked or censored, so they use a VPN daily. There are
-some issues when you use a VPN while visiting some Iranian websites. To exclude those websites from the VPN, I have
-listed all Iranian hosted domains here.
+A lot of services and domains are outside of Iran and they are restricted or blocked by iranian censorship infrastructure or tech companies around the world, 
+for accessing this service you need to use VPN or proxies with tunneling option, apart from these problems, when we use 
+proxies the domestic services are unavailable because our IP is not in Iran; for bypassing these issues we gathered a list of 
+Iranian domains and services to help our people bypass this situation.
 
 ## VPN Problems
 
