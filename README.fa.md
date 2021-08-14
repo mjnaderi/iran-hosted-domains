@@ -117,7 +117,7 @@
 - تبلیغات:
   - [adblock-iran](https://github.com/farrokhi/adblock-iran)
 
-اگر شما منابع دیکری می‌شناسید، و یا وب‌سایتی پیدا کرده‌اید که اینجا نیست لطفا یک
+اگر شما منابع دیگری می‌شناسید، و یا وب‌سایتی پیدا کرده‌اید که اینجا نیست لطفا یک
 [issue](https://github.com/SamadiPour/iran-hosted-domains/issues) باز کنید و یا فایل [custom_domains.py][link-custom] را تغییر داده و [PR][link-pr] ایجاد کنید.
 
 ## چگونه کار می کند؟
