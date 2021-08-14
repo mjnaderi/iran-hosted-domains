@@ -7,7 +7,7 @@ for accessing this service you need to use VPN or proxies with tunneling option,
 proxies the domestic services are unavailable because our IP is not in Iran; for bypassing these issues we gathered a list of 
 Iranian domains and services to help our people bypass this situation.
 
-## VPN Problems
+## VPN & Proxies Problems in Iran
 
 The following issues arise when using VPN for some Iran hosted websites:
 
