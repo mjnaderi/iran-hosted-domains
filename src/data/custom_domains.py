@@ -36,5 +36,6 @@ custom_domains = {
         "turkeykala.com",
         "virgool.io",
         "sut.ac.ir",
+        "digikalajet.com",
     ],
 }
