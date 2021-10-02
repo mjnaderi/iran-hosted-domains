@@ -103,6 +103,18 @@ def create_clash_config(domains: list):
     save_to_file(clash_path, config)
 
 
+def create_switchy_omega_config(others: list):
+    config = "127.0.0.1\n" \
+             "::1\n" \
+             "localhost\n" \
+             "*.ir\n"
+
+    for address in others:
+        config += ("*" + address + "\n")
+
+    save_to_file(switchy_omega_path, config)
+
+
 if __name__ == "__main__":
     if not os.path.exists("download"):
         os.mkdir("download")
@@ -136,3 +148,4 @@ if __name__ == "__main__":
     create_qv2ray_schema(other_domains, proxy_domains)
     create_shadowrocket_config(full_domains)
     create_clash_config(full_domains)
+    create_switchy_omega_config(other_domains)
