@@ -93,6 +93,28 @@ def create_qv2ray_schema(directs: list, proxies: list):
     save_to_file(qv2ray_schema_path, json.dumps(schema))
 
 
+def create_clash_config(ir_domains_path: str, other_domains_path: str):
+    with open(ir_domains_path,"r") as f:
+        address_list = f.read().splitlines()
+
+    with open(other_domains_path,"r") as f:
+        address_list.extend(f.read().splitlines())
+
+    config = "# Clash\n"\
+            "# Wiki: https://github.com/Dreamacro/clash/wiki/premium-core-features#rule-providers\n"\
+            "payload:\n"
+
+    for address in address_list:
+        config += ("  - DOMAIN-SUFFIX,"+address+"\n")
+
+    config += "  - IP-CIDR,192.168.0.0/16\n"\
+            "  - IP-CIDR,10.0.0.0/8\n"\
+            "  - IP-CIDR,172.16.0.0/12\n"\
+            "  - IP-CIDR,127.0.0.0/8\n"\
+            "  - GEOIP,IR"
+    save_to_file(clash_path, config)
+
+
 if __name__ == "__main__":
     if not os.path.exists("download"):
         os.mkdir("download")
@@ -125,3 +147,4 @@ if __name__ == "__main__":
     save_to_file(other_domains_path, "\n".join(other_domains))
     create_qv2ray_schema(other_domains, proxy_domains)
     create_shadowrocket_config(ir_domains_path,other_domains_path)
+    create_clash_config(ir_domains_path,other_domains_path)
