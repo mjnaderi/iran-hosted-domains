@@ -45,34 +45,28 @@ def save_to_file(path, content):
         file.write(content)
 
 
-def create_shadowrocket_config(ir_domains_path: str, other_domains_path: str):
-    with open(ir_domains_path,"r") as f:
-        address_list = f.read().splitlines()
-
-    with open(other_domains_path,"r") as f:
-        address_list.extend(f.read().splitlines())
-
+def create_shadowrocket_config(domains: list):
     config = "#Shadowrocket\n" \
-    "[General]\n" \
-    "bypass-system = true\n"\
-    "skip-proxy = 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, localhost, *.local, captive.apple.com\n"\
-    "tun-excluded-routes = 10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.0.0.0/24, 192.0.2.0/24, 192.88.99.0/24, 192.168.0.0/16, 198.18.0.0/15, 198.51.100.0/24, 203.0.113.0/24, 224.0.0.0/4, 255.255.255.255/32\n"\
-    "dns-server = system\n"\
-    "ipv6 = true\n"\
-    "[Rule]\n"
+             "[General]\n" \
+             "bypass-system = true\n" \
+             "skip-proxy = 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, localhost, *.local, captive.apple.com\n" \
+             "tun-excluded-routes = 10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.0.0.0/24, 192.0.2.0/24, 192.88.99.0/24, 192.168.0.0/16, 198.18.0.0/15, 198.51.100.0/24, 203.0.113.0/24, 224.0.0.0/4, 255.255.255.255/32\n" \
+             "dns-server = system\n" \
+             "ipv6 = true\n" \
+             "[Rule]\n"
 
-    for address in address_list:
-        config += ("DOMAIN-SUFFIX,"+address+",DIRECT\n")
+    for address in domains:
+        config += ("DOMAIN-SUFFIX," + address + ",DIRECT\n")
 
-    config += "USER-AGENT,Line*,PROXY\n"\
-            "IP-CIDR,192.168.0.0/16,DIRECT\n"\
-            "IP-CIDR,10.0.0.0/8,DIRECT\n"\
-            "IP-CIDR,172.16.0.0/12,DIRECT\n"\
-            "IP-CIDR,127.0.0.0/8,DIRECT\n"\
-            "GEOIP,IR,DIRECT\n"\
-            "FINAL,PROXY\n"\
-            "[Host]\n"\
-            "localhost = 127.0.0.1"
+    config += "USER-AGENT,Line*,PROXY\n" \
+              "IP-CIDR,192.168.0.0/16,DIRECT\n" \
+              "IP-CIDR,10.0.0.0/8,DIRECT\n" \
+              "IP-CIDR,172.16.0.0/12,DIRECT\n" \
+              "IP-CIDR,127.0.0.0/8,DIRECT\n" \
+              "GEOIP,IR,DIRECT\n" \
+              "FINAL,PROXY\n" \
+              "[Host]\n" \
+              "localhost = 127.0.0.1"
     save_to_file(shadowrocket_path, config)
 
 
@@ -93,25 +87,19 @@ def create_qv2ray_schema(directs: list, proxies: list):
     save_to_file(qv2ray_schema_path, json.dumps(schema))
 
 
-def create_clash_config(ir_domains_path: str, other_domains_path: str):
-    with open(ir_domains_path,"r") as f:
-        address_list = f.read().splitlines()
+def create_clash_config(domains: list):
+    config = "# Clash\n" \
+             "# Wiki: https://github.com/Dreamacro/clash/wiki/premium-core-features#rule-providers\n" \
+             "payload:\n"
 
-    with open(other_domains_path,"r") as f:
-        address_list.extend(f.read().splitlines())
+    for address in domains:
+        config += ("  - DOMAIN-SUFFIX," + address + "\n")
 
-    config = "# Clash\n"\
-            "# Wiki: https://github.com/Dreamacro/clash/wiki/premium-core-features#rule-providers\n"\
-            "payload:\n"
-
-    for address in address_list:
-        config += ("  - DOMAIN-SUFFIX,"+address+"\n")
-
-    config += "  - IP-CIDR,192.168.0.0/16\n"\
-            "  - IP-CIDR,10.0.0.0/8\n"\
-            "  - IP-CIDR,172.16.0.0/12\n"\
-            "  - IP-CIDR,127.0.0.0/8\n"\
-            "  - GEOIP,IR"
+    config += "  - IP-CIDR,192.168.0.0/16\n" \
+              "  - IP-CIDR,10.0.0.0/8\n" \
+              "  - IP-CIDR,172.16.0.0/12\n" \
+              "  - IP-CIDR,127.0.0.0/8\n" \
+              "  - GEOIP,IR"
     save_to_file(clash_path, config)
 
 
@@ -132,19 +120,19 @@ if __name__ == "__main__":
     full_domains = filter(lambda x: is_url(x), full_domains)
     full_domains = filter(lambda x: not is_ip(x), full_domains)
     full_domains = map(lambda x: convert_utf8(x), full_domains)
-    full_domains = set(full_domains)
+    full_domains = set(sorted(full_domains))
 
     # Divide info
-    ir_domains = set(filter(lambda x: is_ir(x), full_domains))
-    other_domains = full_domains.difference(ir_domains)
+    ir_domains = list(filter(lambda x: is_ir(x), full_domains))
+    other_domains = list(full_domains.difference(ir_domains))
 
     # Sort
     ir_domains = sorted(ir_domains)
     other_domains = sorted(other_domains)
+    full_domains = sorted(full_domains)
 
     # Generate output files
-    save_to_file(ir_domains_path, "\n".join(ir_domains))
-    save_to_file(other_domains_path, "\n".join(other_domains))
+    save_to_file(domains_path, "\n".join(full_domains))
     create_qv2ray_schema(other_domains, proxy_domains)
-    create_shadowrocket_config(ir_domains_path,other_domains_path)
-    create_clash_config(ir_domains_path,other_domains_path)
+    create_shadowrocket_config(full_domains)
+    create_clash_config(full_domains)
