@@ -10,6 +10,9 @@ adsl_tci_file_path = "download/adsl_tci.txt"
 ad_domains_path = "src/data/ads.txt"
 
 # Output files
+ir_domains_path = "output/ir_domains.txt"
+other_domains_path = "output/other_domains.txt"
+
 domains_path = "output/domains.txt"
 qv2ray_schema_path = "output/qv2ray_schema.json"
 shadowrocket_path = "output/shadowrocket.conf"

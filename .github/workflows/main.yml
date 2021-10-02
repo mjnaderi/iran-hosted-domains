@@ -37,7 +37,7 @@ jobs:
 
       - name: Check result files
         run: |
-          total=$(wc -l output/*.txt | awk 'END {print $1}')
+          total=$(wc -l output/domains.txt | awk 'END {print $1}')
           old=$(curl -sSL --connect-timeout 5 -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/SamadiPour/iran-hosted-domains/releases/latest | grep "body" | cut -d\" -f4 | cut -d " " -f1)          
 
           echo "total $total"
@@ -56,8 +56,8 @@ jobs:
           git clone https://github.com/v2fly/domain-list-community
           rm -rf domain-list-community/data/*
           
-          cp output/ir_domains.txt domain-list-community/data/ir
-          cp output/other_domains.txt domain-list-community/data/other
+          mv output/ir_domains.txt domain-list-community/data/ir
+          mv output/other_domains.txt domain-list-community/data/other
           cp src/data/ads.txt domain-list-community/data/ads
           
           cd domain-list-community

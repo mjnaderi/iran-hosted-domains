@@ -147,6 +147,9 @@ if __name__ == "__main__":
     full_domains = sorted(full_domains)
 
     # Generate output files
+    save_to_file(ir_domains_path, "\n".join(ir_domains))
+    save_to_file(other_domains_path, "\n".join(other_domains))
+
     save_to_file(domains_path, "\n".join(full_domains))
     create_qv2ray_schema(other_domains, proxy_domains, ad_domains)
     create_shadowrocket_config(full_domains)
