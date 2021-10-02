@@ -6,6 +6,9 @@ g2b_gov_file_path = "download/g2b_ito_gov.xls"
 adsl_tci_url = "https://raw.githubusercontent.com/Hossein52Hz/iranian-sites-list/main/sitelist.txt"
 adsl_tci_file_path = "download/adsl_tci.txt"
 
+# input files
+ad_domains_path = "src/data/ads.txt"
+
 # Output files
 domains_path = "output/domains.txt"
 qv2ray_schema_path = "output/qv2ray_schema.json"

@@ -70,14 +70,14 @@ def create_shadowrocket_config(domains: list):
     save_to_file(shadowrocket_path, config)
 
 
-def create_qv2ray_schema(directs: list, proxies: list):
+def create_qv2ray_schema(directs: list, proxies: list, ads: list):
     schema = {
         "description": "Iran hosted domains",
         "domainStrategy": "AsIs",
         "domains": {
             "direct": ["regexp:^.+\\.ir$"] + directs,
             "proxy": proxies,
-            "block": ["geosite:category-ads-all"]
+            "block": ["geosite:category-ads-all"] + ads
         },
         "ips": {
             "direct": ["geoip:ir"]
@@ -121,8 +121,11 @@ if __name__ == "__main__":
     if not os.path.exists("output"):
         os.mkdir("output")
 
-    # Proxy domains
+    # load other domains list
     proxy_domains = sorted(set(custom_domains["proxy"]))
+
+    with open(ad_domains_path,"r") as f:
+        ad_domains = sorted(set(f.read().splitlines()))
 
     # Request data from sources and cleanup
     sets = [g2b_ito_gov(), adsl_tci(), set(custom_domains["direct"])]
@@ -145,7 +148,7 @@ if __name__ == "__main__":
 
     # Generate output files
     save_to_file(domains_path, "\n".join(full_domains))
-    create_qv2ray_schema(other_domains, proxy_domains)
+    create_qv2ray_schema(other_domains, proxy_domains, ad_domains)
     create_shadowrocket_config(full_domains)
     create_clash_config(full_domains)
     create_switchy_omega_config(other_domains)
