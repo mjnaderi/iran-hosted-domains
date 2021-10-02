@@ -97,9 +97,8 @@ It can be used in all v2fly, v2ray and xray clients.
 
 ## Files
 
-- **iran.dat:** Contains both `ir_domains.txt` and `other_domains.txt`.
-- **ir_domains.txt:** Contains all websites that ends with `.ir`.
-- **other_domains.txt:** Contains all websites that ends with `.com` or other Top-level domains name.
+- **iran.dat:** Contains all websites hosted in Iran and ADs in a special format.
+- **domains.txt:** Contains all websites hosted in Iran.
 - **qv2ray_schema.json:** Importable json schema that can be used in [Qv2ray](https://github.com/Qv2ray/Qv2ray).
 - **shadowrocket.conf:** Importable conf file that can be used in [Shadowrocket](https://apps.apple.com/us/app/shadowrocket/id932747118).
 

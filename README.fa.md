@@ -102,9 +102,8 @@
 
 ## فایل‌ها
 
-- **iran.dat:** شامل `ir_domains.txt` و `other_domains.txt`.
-- **ir_domains.txt:** شامل وب‌سایت‌هایی با دامنه‌ی .ir.
-- **other_domains.txt:** شامل وب‌سایت‌های میزبانی شده در ایران که دامنه‌ی آنها .ir نیست.
+- **iran.dat:** شامل تمام سایت های هاست شده در ایران و دامنه های تبلیغاتی با فرمت خاص.
+- **domains.txt:** شامل تمام سایت های هاست شده در ایران.
 - **qv2ray_schema.json:** فایل قابل استفاده در کلاینت [Qv2ray](https://github.com/Qv2ray/Qv2ray).
 - **shadowrocket.conf:** فایل قابل استفاده در کلاینت [Shadowrocket](https://apps.apple.com/us/app/shadowrocket/id932747118).
 
