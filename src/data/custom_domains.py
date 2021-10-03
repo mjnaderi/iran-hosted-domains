@@ -37,5 +37,6 @@ custom_domains = {
         "virgool.io",
         "sut.ac.ir",
         "digikalajet.com",
+        "tci.ir",
     ],
 }
