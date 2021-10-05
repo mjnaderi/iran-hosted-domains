@@ -1,50 +1,14 @@
 import re
-
-
-def cleanup(text: str) -> str:
-    text = text.lower()
-
-    # Remove http://, https:// and www.
-    text = re.sub("(http(s)?://)?(www\\.)?", "", text)
-
-    # Remove everything after /
-    text = re.sub("^(.+)/.*$", "\1", text)
-
-    # Remove Port
-    text = re.sub(":\\d{1,5}$", "", text)
-
-    # Remove everything after %
-    text = re.sub("%.+", "", text)
-
-    # Remove ,
-    text = re.sub(",", "", text)
-
-    return text.strip()
-
-
-def is_ip(text: str) -> bool:
-    return bool(
-        re.match("^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}(:\\d{1,5})*$", text)
-    )
-
-
-def is_ir(text: str) -> bool:
-    return bool(re.match("^(.+)\\.ir$", text))
-
-
-def is_url(text: str) -> bool:
-    return bool(URL_REGEX.match(text))
-
-
-def convert_utf8(text: str) -> str:
-    return text.encode('utf-8', errors='ignore').decode('utf-8')
+import os
+import requests
 
 
 URL_REGEX = re.compile(
     r"^"
+    r"(?:https?://)?"
     # user:pass authentication
     r"(?:\S+(?::\S*)?@)?"
-    r"(?:"
+    r"("
     # IP address exclusion
     # private & local networks
     r"(?!(?:10|127)(?:\.\d{1,3}){3})"
@@ -61,10 +25,10 @@ URL_REGEX = re.compile(
     r"|"
     # host & domain names, may end with dot
     # can be replaced by a shortest alternative
-    # r"(?![-_])(?:[-\w\u00a1-\uffff]{0,63}[^-_]\.)+"
-    # r"(?:(?:[a-z\u00a1-\uffff0-9]-?)*[a-z\u00a1-\uffff0-9]+)"
+    # r'(?![-_])(?:[-\w\u00a1-\uffff]{0,63}[^-_]\.)+'
+    # r'(?:(?:[a-z\u00a1-\uffff0-9]-?)*[a-z\u00a1-\uffff0-9]+)'
     # # domain name
-    # r"(?:\.(?:[a-z\u00a1-\uffff0-9]-?)*[a-z\u00a1-\uffff0-9]+)*"
+    # r'(?:\.(?:[a-z\u00a1-\uffff0-9]-?)*[a-z\u00a1-\uffff0-9]+)*'
     r"(?:"
     r"(?:"
     r"[a-z0-9\u00a1-\uffff]"
@@ -79,6 +43,54 @@ URL_REGEX = re.compile(
     r"(?::\d{2,5})?"
     # resource path (optional)
     r"(?:[/?#]\S*)?"
-    r"$"
-    , re.UNICODE | re.I
+    r"$",
+    re.UNICODE | re.I,
 )
+
+IP_REGEX = re.compile(
+    r"^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])$"
+)
+
+IR_DOMAIN_REGEX = re.compile(r"\.ir$", re.IGNORECASE)
+
+
+def cleanup(text: str) -> str:
+    matched_domain = URL_REGEX.search(text.strip())
+    host = matched_domain.group(1) if matched_domain is not None else ""
+
+    if host.startswith("www."):
+        host = host[4:]
+
+    return host
+
+
+def is_ip(text: str) -> bool:
+    return bool(IP_REGEX.match(text))
+
+
+def is_ir(text: str) -> bool:
+    return bool(IR_DOMAIN_REGEX.match(text))
+
+
+def is_url(text: str) -> bool:
+    return bool(URL_REGEX.match(text))
+
+
+def convert_utf8(text: str) -> str:
+    return text.encode("utf-8", errors="ignore").decode("utf-8")
+
+
+def download(url: str, path: str):
+    if os.path.exists(path):
+        return
+
+    resp = requests.get(url, allow_redirects=True, verify=False)
+    resp.raise_for_status()
+
+    with open(path, "wb") as fp:
+        fp.write(resp.content)
+
+
+def save_to_file(path: str, content: str):
+    with open(path, "w") as fp:
+        fp.write(content)
