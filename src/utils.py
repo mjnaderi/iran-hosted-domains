@@ -1,5 +1,6 @@
-import re
 import os
+import re
+
 import requests
 
 
@@ -44,7 +45,7 @@ URL_REGEX = re.compile(
     # resource path (optional)
     r"(?:[/?#]\S*)?"
     r"$",
-    re.UNICODE | re.I,
+    re.UNICODE | re.IGNORECASE
 )
 
 IP_REGEX = re.compile(
@@ -54,26 +55,26 @@ IP_REGEX = re.compile(
 IR_DOMAIN_REGEX = re.compile(r"\.ir$", re.IGNORECASE)
 
 
-def cleanup(text: str) -> str:
-    matched_domain = URL_REGEX.search(text.strip())
-    host = matched_domain.group(1) if matched_domain is not None else ""
+def extract_domain(url: str) -> str:
+    matched_domain = URL_REGEX.search(url.strip())
+    domain = matched_domain.group(1) if matched_domain is not None else ""
 
-    if host.startswith("www."):
-        host = host[4:]
+    if domain.startswith("www."):
+        domain = domain[4:]
 
-    return host
+    return domain
 
 
-def is_ip(text: str) -> bool:
-    return bool(IP_REGEX.match(text))
+def is_not_ip(text: str) -> bool:
+    return not bool(IP_REGEX.search(text))
 
 
 def is_ir(text: str) -> bool:
-    return bool(IR_DOMAIN_REGEX.match(text))
+    return bool(IR_DOMAIN_REGEX.search(text))
 
 
 def is_url(text: str) -> bool:
-    return bool(URL_REGEX.match(text))
+    return bool(URL_REGEX.search(text))
 
 
 def convert_utf8(text: str) -> str:

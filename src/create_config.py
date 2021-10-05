@@ -32,14 +32,14 @@ def shadowrocket(domains: Iterable[str]):
     utils.save_to_file(consts.shadowrocket_path, config)
 
 
-def qv2ray(directs: Iterable[str], proxies: Iterable[str], ads: Iterable[str]):
+def qv2ray(direct_domains: Iterable[str], proxied_domains: Iterable[str], ads_domains: Iterable[str]):
     schema = {
         "description": "Iran hosted domains",
         "domainStrategy": "AsIs",
         "domains": {
-            "direct": ["regexp:^.+\\.ir$"] + list(directs),
-            "proxy": list(proxies),
-            "block": ["geosite:category-ads-all"] + list(ads),
+            "direct": ["regexp:^.+\\.ir$"] + list(direct_domains),
+            "proxy": list(proxied_domains),
+            "block": ["geosite:category-ads-all"] + list(ads_domains),
         },
         "ips": {"direct": ["geoip:ir"]},
         "name": "ir_hosted",
