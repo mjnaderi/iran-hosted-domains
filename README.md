@@ -105,7 +105,7 @@ It can be used in all v2fly, v2ray and xray clients.
 ## Source
 
 - Iran Domains:
-  - [ITO GOV](https://g2b.ito.gov.ir/index.php/site/list_ip)
+  - [ITO GOV](https://eservices.ito.gov.ir/page/iplist)
   - [ADSL TCI](https://adsl.tci.ir/panel/sites)
   - [Custom List][link-custom]
 - ADs:

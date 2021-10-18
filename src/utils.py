@@ -1,8 +1,8 @@
 import os
 import re
+from email import header
 
 import requests
-
 
 URL_REGEX = re.compile(
     r"^"
@@ -81,11 +81,11 @@ def convert_utf8(text: str) -> str:
     return text.encode("utf-8", errors="ignore").decode("utf-8")
 
 
-def download(url: str, path: str):
+def download(url: str, path: str, method: str = 'GET', headers: dict = None, payload: str = None):
     if os.path.exists(path):
         return
 
-    resp = requests.get(url, allow_redirects=True, verify=False)
+    resp = requests.request(method, url, allow_redirects=True, verify=False, headers=headers, data=payload)
     resp.raise_for_status()
 
     with open(path, "wb") as fp:
