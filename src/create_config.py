@@ -56,10 +56,10 @@ def clash(domains: Iterable[str]):
     )
     config += "".join(f"  - DOMAIN-SUFFIX,{domain}\n" for domain in domains)
     config += (
-        "  - IP-CIDR,192.168.0.0/16\n"
-        "  - IP-CIDR,10.0.0.0/8\n"
-        "  - IP-CIDR,172.16.0.0/12\n"
-        "  - IP-CIDR,127.0.0.0/8\n"
+#         "  - IP-CIDR,192.168.0.0/16\n"
+#         "  - IP-CIDR,10.0.0.0/8\n"
+#         "  - IP-CIDR,172.16.0.0/12\n"
+#         "  - IP-CIDR,127.0.0.0/8\n"
         "  - GEOIP,IR\n"
     )
 
