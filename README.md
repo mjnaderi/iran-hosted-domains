@@ -94,6 +94,28 @@ It can be used in all v2fly, v2ray and xray clients.
   <img alt="shadowrocket" src="https://user-images.githubusercontent.com/24422125/124380847-5d371300-dcd4-11eb-8274-aa72d470357f.png">
 </p>
 
+### [Clash](https://github.com/Dreamacro/clash) (Like [ClashX](https://github.com/yichengchen/clashX) / [clash_for_windows_pkg](https://github.com/Fndroid/clash_for_windows_pkg) / ...)
+
+1. Open your current profile/config that you use.
+2. Add these lines to the file:
+```yaml
+rule-providers:
+  iran:
+    type: http
+    behavior: classical
+    url: "https://github.com/SamadiPour/iran-hosted-domains/releases/latest/download/clash_rules.yaml"
+    path: ./ruleset/iran.yaml
+    interval: 432000
+```
+
+3. Add this line to `rules:` section
+```yaml
+  - RULE-SET,iran,✅ Direct
+```
+
+4. Save the file.
+5. Based on the client, you may need to set clash on `Rule` mode.
+
 
 ## Files
 
