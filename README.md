@@ -110,7 +110,7 @@ rule-providers:
 
 3. Add this line to `rules:` section
 ```yaml
-  - RULE-SET,iran,✅ Direct
+  - RULE-SET,iran,DIRECT
 ```
 ![image](https://user-images.githubusercontent.com/24422125/137904776-99023a57-7895-4e0c-8c42-9b2800b606f4.png)
 
