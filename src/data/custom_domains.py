@@ -38,5 +38,6 @@ custom_domains = {
         "upera.tv",
         "ustclothing.com",
         "virgool.io",
+        "parspack.com",
     ],
 }
