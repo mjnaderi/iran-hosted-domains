@@ -39,5 +39,7 @@ custom_domains = {
         "ustclothing.com",
         "virgool.io",
         "parspack.com",
+        "rasm.io",
+        "pi.hole",
     ],
 }
