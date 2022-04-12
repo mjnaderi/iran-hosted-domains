@@ -41,5 +41,6 @@ custom_domains = {
         "parspack.com",
         "rasm.io",
         "pi.hole",
+        "bankino.digital",
     ],
 }
