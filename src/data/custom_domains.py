@@ -42,5 +42,6 @@ custom_domains = {
         "rasm.io",
         "pi.hole",
         "bankino.digital",
+        "chapchi.com"
     ],
 }
